@@ -1,0 +1,206 @@
+/* Placing the select where I want it with xx-large font*/
+select {
+    position: absolute;
+    font-size: xx-large; 
+    right : 150px;   
+}
+
+/* Placing the columns where they're supposed to be*/
+.column {
+    float: left;
+}
+
+/* Deciding the width of the left and middle column*/
+.left {
+    width: 25%;
+}
+
+.middle {
+    width: 40%;
+    margin-left :25%;
+}
+
+/*Setting the background colour of the cart*/
+.right{
+  background-color :aquamarine;
+}
+
+/* setting the h3 header to have a large margin on the top for separations*/
+h3 {
+    margin-top:15px;
+    margin-bottom: 0px;
+}
+/*setting the h2 header to have large font size*/
+h2 {
+    font-size :large;
+}
+
+/*setting the h1 header to have very large font size*/
+h1 {
+    font-size :40px;
+}
+
+/*Putting paragraphs closer together with font size medium*/
+p {
+    margin-top: 0px;
+    margin-bottom : 0px;
+    font-size :large;
+}
+
+/*Making it so that breaks doesn't put stuff too far apart*/
+br {
+    margin-top: 0px;
+    margin-bottom : 0px;
+}
+
+/*Setting the size of images (add and remove) to be 20 by 20 pixels*/
+img {
+    width : 20px;
+    height : 20px;
+}
+
+/*Setting strong, used by the name of products, to be a dark green colour*/
+strong {
+    color : rgb(50, 60, 50);
+}
+
+/*Setting the minimum order and delivery info information at the top of the page to be a little bigger*/
+.start{
+    font-size :large;
+    margin-top :10px;
+}
+
+/*Setting the elements inside the order to be different, they have font size small and are brown*/
+.smallOrder{
+    font-size :small;
+    color:brown;
+}
+
+/*Setting the size and margins of the submit order button*/
+button{
+    margin-top : 20px;
+    width : 100px;
+    height : 40px;
+}
+
+/*Setting the text of the submit button to be blue*/
+#submit_button{
+    color:blue;
+}
+
+
+/*
+Setting the margin of the cart message that tells the user how much they need to fill their cart by to be able to play the order to a high number to have some space between
+the products in the cart and the stats of the cart
+*/
+#not_enough{
+    margin-top : 30px;
+}
+
+/*Setting the background colour of the page to be antique white because I think it looks nice*/
+body{
+    background-color:antiquewhite;
+}
+
+/*Making the section headers purple to distinguish them*/
+.section_headers{
+    color :rgb(145, 65, 161);
+}
+
+input{
+    width:13px;
+    height:17px;
+    font-size:large;
+}
+
+#inputBoxes{
+    margin-left:50px;
+}
+
+#submitButton{
+    margin-left:35px;
+    width : 200px;
+}
+
+.red{
+    background-color:red;
+    width:20px;
+    height:20px;
+    margin-left: 3px;
+}
+
+.white{
+    background-color:white;
+    width:20px;
+    height:20px;
+    margin-left: 3px;
+}
+
+.numB{
+    width:60px;
+    height:40px;
+    font-size:x-large;
+}
+
+.clump1{
+    margin-left:5.5%;
+    width:5%;;
+}
+
+.clump2{
+    margin-left:5.2%;
+    width:5%;
+}
+
+.clump3{
+    margin-left:5.2%;
+    width:5%;
+}
+
+.clump4{
+    margin-left:5.2%;
+    width:5%;
+}
+
+#B1{
+    background-color:brown;
+    color:white;
+}
+
+#B2{
+    background-color:orange;
+    color:white;
+}
+
+#B3{
+    background-color:rgb(76, 196, 184);
+    color:white;
+}
+
+#B4{
+    background-color:green;
+    color:white;
+}
+
+#B5{
+    background-color:blue;
+    color:white;
+}
+
+#B6{
+    background-color:purple;
+    color:white;
+}
+
+
+
+#clearButton{
+    margin-left:2%;
+}
+
+#delete{
+    margin-left:11%;
+    background-color:black;
+    color:white;
+}
+

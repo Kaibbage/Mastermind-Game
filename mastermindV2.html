@@ -1,0 +1,406 @@
+<!-- Provided HTML code -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<title>Mastermind Game</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="stylesV2.css">
+	</head>
+	
+	<body onload="init()">
+        <h1>Mastermind Game</h1>
+        <br>
+
+        <div id = "test">
+
+        </div>
+		
+            
+        
+		<div id="main">
+			<div class="column left" id="left"></div>
+			<div class="column middle" id="middle">
+                <label for="Num1">Num1</label>
+                <input type="text" id="Num1" name="Num1" onkeydown = "myFunction(event)">
+                <label for="Num2">&nbsp&nbspNum2</label>
+                <input type="text" id="Num2" name="Num2" onkeydown = "myFunction(event)">
+                <label for="Num3">&nbsp&nbspNum3</label>
+                <input type="text" id="Num3" name="Num3" onkeydown = "myFunction(event)">
+                <label for="Num4">&nbsp&nbspNum4</label>
+                <input type="text" id="Num4" name="Num4" onkeydown = "myFunction(event)">
+
+                <br>
+                <br>
+
+                <button type="button" id = "submitButton">Submit</button>
+
+                <br>
+                <br>
+
+                <div class = "buttons" id = "BClump">
+                    <button type="button" class = "numB b1" id = "B1">1</button>
+                    <button type="button" class = "numB b1" id = "B2">2</button>
+                    <button type="button" class = "numB b1" id = "B3">3</button>
+                    <button type="button" class = "numB b1" id = "B4">4</button>
+                    <button type="button" class = "numB b1" id = "B5">5</button>
+                    <button type="button" class = "numB b1" id = "B6">6</button>
+                    <br>
+                    <button type="button" class = "numB b1" id = "delete"><--</button>
+                    <button type="button" id = "clearButton">Clear</button>
+                </div>
+
+                
+
+                
+
+
+
+
+
+
+
+                
+            </div>
+			<div class="column right" id="right"></div>
+		</div>
+	
+		<!--<script src="clientV2.js"></script>-->
+        <script>let reds = 0;
+            let whites = 0;
+            
+            let code1 = 0;
+            let code2 = 0;
+            let code3 = 0;
+            let code4 = 0;
+            
+            let tempCode1 = 0;
+            let tempCode2 = 0;
+            let tempCode3 = 0;
+            let tempCode4 = 0;
+            
+            
+            let val1 = 0;
+            let val2 = 0;
+            let val3 = 0;
+            let val4 = 0;
+            
+            let origVal1 = 0;
+            let origVal2 = 0;
+            let origVal3 = 0;
+            let origVal4 = 0;
+            
+            let counter = 0;
+            let turnCounter = 0;
+            
+            
+            
+            function init(){
+                let subButton = document.getElementById("submitButton");
+                subButton.onclick = function(){submitAndGetBack()};
+            
+                let clearButton = document.getElementById("clearButton");
+                clearButton.onclick = function(){clearBoxes()};
+            
+                let buttonClump = document.getElementById("BClump");
+                //buttonClump.innerHTML = `<div class = "column clump1" id = "clump1"><button type="button" class = "numB b1" id = "B11">1</button><br><button type="button" class = "numB b1" id = "B12">2</button><br><button type="button" class = "numB b1" id = "B13">3</button><br><button type="button" class = "numB b1" id = "B14">4</button><br><button type="button" class = "numB b1" id = "B15">5</button><br><button type="button" class = "numB b1" id = "B16">6</button></div><div class = "column clump2" id = "clump2"><button type="button" class = "numB b2" id = "B21">1</button><br><button type="button" class = "numB b2" id = "B22">2</button><br><button type="button" class = "numB b2" id = "B23">3</button><br><button type="button" class = "numB b2" id = "B24">4</button><br><button type="button" class = "numB b2" id = "B25">5</button><br><button type="button" class = "numB b2" id = "B26">6</button></div><div class = "column clump3" id = "clump3"><button type="button" class = "numB b3" id = "B31">1</button><br><button type="button" class = "numB b3" id = "B32">2</button><br><button type="button" class = "numB b3" id = "B33">3</button><br><button type="button" class = "numB b3" id = "B34">4</button><br><button type="button" class = "numB b3" id = "B35">5</button><br><button type="button" class = "numB b3" id = "B36">6</button></div><div class = "column clump4" id = "clump4"><button type="button" class = "numB b4" id = "B41">1</button><br><button type="button" class = "numB b4" id = "B42">2</button><br><button type="button" class = "numB b4" id = "B43">3</button><br><button type="button" class = "numB b4" id = "B44">4</button><br><button type="button" class = "numB b4" id = "B45">5</button><br><button type="button" class = "numB b4" id = "B46">6</button></div>`
+            
+                
+            
+                code1 = Math.floor(Math.random() * 6) + 1;
+                code2 = Math.floor(Math.random() * 6) + 1;
+                code3 = Math.floor(Math.random() * 6) + 1;
+                code4 = Math.floor(Math.random() * 6) + 1;
+            
+                //Testing line
+                let testo = document.getElementById("test");
+                testo.innerHTML = `<button type="button" id = "AnswerButton" onclick="revealAnswer()">Give up</button>`;
+            
+                clearBoxes();
+                
+            
+                setOnClicks();
+                
+            
+            
+            }
+            
+            function setOnClicks(){
+            
+                document.getElementById("B1").onclick = function(){changeBox(1)};
+                document.getElementById("B2").onclick = function(){changeBox(2)};
+                document.getElementById("B3").onclick = function(){changeBox(3)};
+                document.getElementById("B4").onclick = function(){changeBox(4)};
+                document.getElementById("B5").onclick = function(){changeBox(5)};
+                document.getElementById("B6").onclick = function(){changeBox(6)};
+                document.getElementById("delete").onclick = function(){deleteNumber()}
+            
+            }
+            
+            //Function to submit when hit enter key
+            function myFunction(event){
+                var x = event.key;
+            
+                if (x === "Enter") {
+                    submitAndGetBack();
+                }
+            }
+            
+            
+            function revealAnswer(){
+                let testo = document.getElementById("test");
+                testo.innerHTML = "";
+                testo.innerHTML +="<br>";
+                testo.innerHTML += "<br>";
+                testo.innerHTML += `<p>${code1} ${code2} ${code3} ${code4}</p>`;
+            }
+            
+            function clearBoxes(){
+                let n1 = document.getElementById("Num1");
+                let n2 = document.getElementById("Num2");
+                let n3 = document.getElementById("Num3");
+                let n4 = document.getElementById("Num4");
+            
+                n1.value = "";
+                n2.value = "";
+                n3.value = "";
+                n4.value = "";
+            }
+            
+            //Submit info to client and get result back
+            function submitAndGetBack(){
+            
+                let n1 = document.getElementById("Num1");
+                let n2 = document.getElementById("Num2");
+                let n3 = document.getElementById("Num3");
+                let n4 = document.getElementById("Num4");
+            
+                if(n1.value !== "" && n2.value !== "" && n3.value !== "" && n4.value !== ""){
+                    
+                    val1 = parseInt(n1.value, 10);
+                    val2 = parseInt(n2.value, 10);
+                    val3 = parseInt(n3.value, 10);
+                    val4 = parseInt(n4.value, 10);
+            
+                    origVal1 = val1;
+                    origVal2 = val2;
+                    origVal3 = val3;
+                    origVal4 = val4;
+            
+                    reds = 0;
+                    whites = 0;
+            
+                    turnCounter++;
+            
+                    getTempCodes();
+                    getNumReds();
+                    getNumWhites();
+                    printRedWhites();
+            
+                    
+                }
+                else{
+                    alert("Fill in all the boxes to submit");
+                }
+            
+                if(reds === 4){
+                    setTimeout(() => {  
+                        alert(`Congratulations you have won in ${turnCounter} moves!`);
+                        resetPage(); 
+                    }, 1000);
+                    
+                }
+
+                n1.value = "";
+                n2.value = "";
+                n3.value = "";
+                n4.value = "";
+            }
+            
+            //Make temp codes back into real code
+            function getTempCodes(){
+                tempCode1 = code1;
+                tempCode2 = code2;
+                tempCode3 = code3;
+                tempCode4 = code4;
+            }
+            
+            //Reset page to base state
+            function resetPage(){
+                document.getElementById("right").innerHTML = "";
+                document.getElementById("test").innerHTML = "";
+                document.getElementById("Num1").value = "";
+                document.getElementById("Num2").value = "";
+                document.getElementById("Num3").value = "";
+                document.getElementById("Num4").value = "";
+                counter = 0;
+                turnCounter = 0;
+                init();
+            
+            
+            }
+            
+            
+            //Get num reds
+            function getNumReds(){
+                if(val1 === tempCode1){
+                    reds++;
+                    val1 = 9;
+                    tempCode1 = 9;
+                }
+                if(val2 === tempCode2){
+                    reds++;
+                    val2 = 10;
+                    tempCode2 = 10;
+                }
+                if(val3 === tempCode3){
+                    reds++;
+                    val3 = 11;
+                    tempCode3 = 11;
+                }
+                if(val4 === tempCode4){
+                    reds++;
+                    val4 = 12;
+                    tempCode4 = 12;
+                }
+            }
+            
+            //Get num whites
+            function getNumWhites(){
+                if(val1 === tempCode2){
+                    whites++;
+                    val1 = 9;
+                    tempCode2 = 10;
+                }
+                else if(val1 === tempCode3){
+                    whites++;
+                    val1 = 9;
+                    tempCode3 = 11;
+                }
+                else if(val1 === tempCode4){
+                    whites++;
+                    val1 = 9;
+                    tempCode4 = 12;
+                }
+            
+                if(val2 === tempCode1){
+                    whites++;
+                    val2 = 10;
+                    tempCode1 = 9;
+                }
+                else if(val2 === tempCode3){
+                    whites++;
+                    val2 = 10;
+                    tempCode3 = 11;
+                }
+                else if(val2 === tempCode4){
+                    whites++;
+                    val2 = 10;
+                    tempCode4 = 12;
+                }
+            
+                if(val3 === tempCode1){
+                    whites++;
+                    val3 = 11;
+                    tempCode1 = 9;
+                }
+                else if(val3 === tempCode2){
+                    whites++;
+                    val3 = 11;
+                    tempCode2 = 10;
+                }
+                else if(val3 === tempCode4){
+                    whites++;
+                    val3 = 11;
+                    tempCode4 = 12;
+                }
+            
+                if(val4 === tempCode1){
+                    whites++;
+                    val4 = 12;
+                    tempCode1 = 9;
+                }
+                else if(val4 === tempCode2){
+                    whites++;
+                    val4 = 12;
+                    tempCode2 = 10;
+                }
+                else if(val4 === tempCode3){
+                    whites++;
+                    val4 = 12;
+                    tempCode3 = 11;
+                }
+            }
+            
+            //Print the number of reds and whites
+            function printRedWhites(){
+            
+                let rightColumn = document.getElementById("right");
+            
+                for(let i = 0; i < reds; i++){
+                    rightColumn.innerHTML += `<button type="button" id = "SB${counter}" class = "red ${counter}"></button>`;
+                    counter++;
+                }
+                for(let i = 0; i < whites; i++){
+                    rightColumn.innerHTML += `<button type="button" id = "SB${counter}" class = "white ${counter}"></button>`;
+                    counter++;
+                }
+
+                
+                if(reds < 1 && whites < 1){
+                    rightColumn.innerHTML += `<h3>No pins</h3>`;
+                }
+                
+            
+                rightColumn.innerHTML += `<p> ${origVal1} ${origVal2} ${origVal3} ${origVal4} reds :${reds}, whites:${whites}</p>`;
+                
+            }
+            
+            
+            function changeBox(bValue){
+                let box1 = document.getElementById("Num1");
+                let box2 = document.getElementById("Num2");
+                let box3 = document.getElementById("Num3");
+                let box4 = document.getElementById("Num4");
+                
+                if(box1.value === ""){
+                    box1.value = bValue;
+                }
+                else if(box2.value === ""){
+                    box2.value = bValue;
+                }
+                else if(box3.value === ""){
+                    box3.value = bValue;
+                }
+                else if(box4.value === ""){
+                    box4.value = bValue;
+                }
+            }
+            
+            function deleteNumber(){
+                let box1 = document.getElementById("Num1");
+                let box2 = document.getElementById("Num2");
+                let box3 = document.getElementById("Num3");
+                let box4 = document.getElementById("Num4");
+                
+                if(box4.value !== ""){
+                    box4.value = "";
+                }
+                else if(box3.value !== ""){
+                    box3.value = "";
+                }
+                else if(box2.value !== ""){
+                    box2.value = "";
+                }
+                else if(box1.value !== ""){
+                    box1.value = "";
+                }
+            }
+            
+            
+            
+            </script>
+	</body>
+
+</html>
